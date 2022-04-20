@@ -1,0 +1,16 @@
+{
+  "name": "lad_chinese_docs",
+  "version": "1.0.0",
+  "description": "#### Description lad框架的中文翻译",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitee.com:shawspring/lad_chinese_docs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
