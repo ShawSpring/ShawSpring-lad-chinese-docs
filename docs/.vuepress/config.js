@@ -1,8 +1,8 @@
 module.exports = {
     // 站点配置
     lang: 'zh-CN',
-    title: 'Lad 框架',
-    description: 'Lad框架 立志做最好的Node.js框架',
+    title: 'Lad中文文档',
+    description: 'Lad框架中文文档',
     head: [
         ['link', { rel: 'icon', href: '/favicon.ico' }],
         ['meta', { name: 'application-name', content: 'Lad框架中文文档' }],
@@ -11,21 +11,48 @@ module.exports = {
     // 主题和它的配置
     theme: '@vuepress/theme-default',
     themeConfig: {
-        logo: 'media/logo-square.svg',
+        logo: '/media/logo-square.svg',
+        smoothScroll: true,
+        // docsRepo: 'https://gitee.com/shawspring/lad-chinese-docs.git', // v2.0
+        repo: 'https://github.com/ladjs/lad',
+        repoLabel: 'Github',
+
+        // 以下为可选的编辑链接选项
+
+        /* 这是我翻译文档地址 */
         docsRepo: 'https://gitee.com/shawspring/lad-chinese-docs.git',
-        docsBranch: 'master',
+
+        // 假如文档不是放在仓库的根目录下：
         docsDir: 'docs',
-        /* https://gitee.com/shawspring/lad-chinese-docs/edit/master/docs/README.md */
-        editLinkPattern: ':repo/edit/:branch/:path',
+        // 假如文档放在一个特定的分支下：
+        docsBranch: 'master',
+        // 默认是 false, 设置为 true 来启用
+        editLinks: true,
+        // 默认为 "Edit this page"
+        editLinkText: '编辑翻译文档',
+        sidebar: [
+            ['/','目录'],
+            ['/Features','特性'],
+            ['/GetStarted',"快速上手"],
+        ],
+        sidebarDepth: 6,
+          
+        lastUpdated: 'Last Updated', 
         locales: {
             '/': {
-                selectLanguageText: '选择语言',
-                selectLanguageAriaLabel: '选择语言',
-                selectLanguageName: '简体中文',
-
-                editLinkText: '在 Gitee 上编辑此页',
+                selectText: '选择语言',
+                // 该语言在下拉菜单中的标签
+                label: '简体中文',
+              
                 lastUpdatedText: '上次更新',
                 contributorsText: '贡献者',
+
+                serviceWorker: {
+                    updatePopup: {
+                        message: "发现新内容可用.",
+                        buttonText: "刷新"
+                    }
+                },
 
                 // custom containers
                 tip: '提示',
@@ -47,7 +74,7 @@ module.exports = {
                 toggleSidebar: '切换侧边栏',
             },
             '/en/': {
-                selectLanguageName: 'English',
+                label: 'English',
             },
         },
     },

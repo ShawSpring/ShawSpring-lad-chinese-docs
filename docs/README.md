@@ -1,4 +1,5 @@
 ---
+sidebarDepth: 0
 ---
 <h1 align="center">
   <a href="https://ladjs.github.io/lad/"><img src="https://lad.js.org/media/lad.png" alt="lad" /></a>
