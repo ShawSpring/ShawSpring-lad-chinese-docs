@@ -1,4 +1,6 @@
-![lad](/media/lad.png)
+<h1 align="center">
+  <a href="https://ladjs.github.io/lad/"><img src="https://lad.js.org/media/lad.png" alt="lad" /></a>
+</h1>
 <div align="center">
   <a href="https://join.slack.com/t/ladjs/shared_invite/zt-fqei6z11-Bq2trhwHQxVc5x~ifiZG0g"><img src="https://img.shields.io/badge/chat-join%20slack-brightgreen" alt="chat" /></a>
   <a href="https://travis-ci.org/ladjs/lad"><img src="https://travis-ci.org/ladjs/lad.svg?branch=master" alt="build status" /></a>
