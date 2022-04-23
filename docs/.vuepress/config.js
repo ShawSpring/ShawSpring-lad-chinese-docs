@@ -1,5 +1,6 @@
 const themeConfig = require("./themeConfig")
 module.exports = {
+    base:"ShawSpring-lad-chinese-docs",
     // 站点配置
     lang: 'zh-CN',
     title: 'Lad中文文档',
@@ -25,7 +26,7 @@ module.exports = {
 
     /*  插件配置 */
     plugins: [
-        '@vuepress/back-to-top'
+        'one-click-copy'
         // ["vuepress-plugin-giscus",{
         //     repo:"ShawSpring/giscus",
         //     repoId:"R_kgDOHOIqlw",
@@ -54,5 +55,4 @@ module.exports = {
     // theme: '@vuepress/theme-default',
     theme: '@qcyblm/vpx',
     themeConfig: themeConfig,
-
 }
