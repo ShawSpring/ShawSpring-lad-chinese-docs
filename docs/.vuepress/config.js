@@ -1,6 +1,6 @@
 const themeConfig = require("./themeConfig")
 module.exports = {
-    base:"/ShawSpring-lad-chinese-docs/",
+    base: "/ShawSpring-lad-chinese-docs/",
     // 站点配置
     lang: 'zh-CN',
     title: 'Lad中文文档',
@@ -26,7 +26,17 @@ module.exports = {
 
     /*  插件配置 */
     plugins: [
-        'one-click-copy'
+        // 'one-click-copy',
+        ['vuepress-plugin-code-copy',
+            {
+                align: 'bottom',
+                color: 'rgba(255,255,255,0.4)',
+                backgroundTransition: 'bottom',
+                backgroundColor: '#0075b8',
+                successText: '复制成功',
+                staticIcon: false,
+            }
+        ],
         // ["vuepress-plugin-giscus",{
         //     repo:"ShawSpring/giscus",
         //     repoId:"R_kgDOHOIqlw",

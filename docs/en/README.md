@@ -1111,7 +1111,7 @@ If you are seeking permission to use these trademarks, then please [contact us](
 [MIT](LICENSE) © [Nick Baugh](http://niftylettuce.com)
 
 
-##
+
 
 <a href="#"><img src="https://lad.js.org/media/lad-footer.png" alt="#" /></a>
 

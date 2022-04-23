@@ -24,7 +24,7 @@ module.exports = {
         repositories: 'lad',  // 填写 Git 项目仓库
         // 自定义仓库链接文字。默认从 `themeConfig.repo` 中自动推断为
         // `GitHub`/`GitLab`/`Bitbucket`/`Gitee` 其中之一，或是 `Source`。
-        label: '查看源码',
+        label: '', // 这里没有中英文切换，干脆不要
     },
 
     editLinks: true,  // 默认是 false, 设置为 true 来启用
