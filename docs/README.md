@@ -29,134 +29,134 @@
 <hr />
 <div align="center">❤️ 喜欢这个项目? 支持<a href="https://github.com/niftylettuce" target="_blank">@niftylettuce's</a> <a href="https://en.wikipedia.org/wiki/Free_and_open-source_software" target="_blank">FOSS</a> on <a href="https://patreon.com/niftylettuce" target="_blank">Patreon</a> or <a href="https://paypal.me/niftylettuce">PayPal</a> 🦄</div>
 
-## Table of Contents
+## 目录
 [[toc]]
 
 
 
-## Features
+## 特点
 
-Lad boasts dozens of features and is extremely configurable.
+Lad拥有数十种功能，并且高度可配置.
 
-### Microservices
+### 微服务
 
-These microservices are preconfigured for security, performance, and graceful reloading.
+这些微服务已针对安全、性能和优雅的重载资源进行预配置. 
+> 点击链接查看示例
+* Webapp server → [web.js](https://lad.js.org/template/web.js)
+* API server → [api.js](https://lad.js.org/template/api.js)
+* Job scheduler → [bree.js](https://lad.js.org/template/bree.js)
+* Proxy server → [proxy.js](https://lad.js.org/template/proxy.js)
 
-* Webapp server → [web.js](template/web.js)
-* API server → [api.js](template/api.js)
-* Job scheduler → [bree.js](template/bree.js)
-* Proxy server → [proxy.js](template/proxy.js)
+### 前端
 
-### Front-end
-
-* Browser linting using [eslint-plugin-compat][] and [browserslist][] (see [.browserslistrc](template/.browserslistrc) for the default config)
-* [Pug][] template engine (you can easily use [Moon][], [Vue][], [React][], or [Angular][], though typically [you aren't going to need it][yagni])
-* [Gulp][] (latest version 4.x)
-* [Sass][]
-* [PostCSS][] (with [font-magician][], [import-url][], [font-grabber][], [base64][], and [cssnext][] pre-configured)
-* [Bootstrap][]
-* [Font Awesome][font-awesome]
-* [SpinKit][]
-* [SweetAlert2][]
-* [Dense][]
-* [Waypoints][]
-* [LiveReload][]
+* [eslint-plugin-compat](https://github.com/amilajack/eslint-plugin-compat) 和[browserslist](https://github.com/ai/browserslist)用于处理浏览器兼容性(有关默认配置，请参阅[.browserslistrc](https://lad.js.org/template/.browserslistrc))
+* [Pug](https://pugjs.org/) 模板引擎 (由于你可以很方便的使用[Moon](https://github.com/kbrsh/moon), [Vue](https://vuejs.org/), [React](https://facebook.github.io/react/), 或 [Angular](https://angular.io/),通常你不需要它)
+* [Gulp](https://gulpjs.com/) (latest version 4.x)
+* [Sass](http://sass-lang.com/)
+* [PostCSS](http://postcss.org/) (with [font-magician](https://github.com/jonathantneal/postcss-font-magician), [import-url](https://github.com/unlight/postcss-import-url), [font-grabber](https://github.com/AaronJan/postcss-font-grabber), [base64](https://github.com/jelmerdemaat/postcss-base64), and [cssnext](http://cssnext.io/) pre-configured)
+* [Bootstrap](https://getbootstrap.com/)
+* [Font Awesome](http://fontawesome.io/)
+* [SpinKit](http://tobiasahlin.com/spinkit/)
+* [SweetAlert2](https://limonte.github.io/sweetalert2/)
+* [Dense](http://dense.rah.pw/)
+* [Waypoints](http://imakewebthings.com/waypoints/)
+* [LiveReload](https://github.com/intesso/connect-livereload)
 * …
 
-### Back-end
+### 后端
 
-* Redis, sessions, and flash toast and modal [SweetAlert2][] messages (uses [ioredis][] which has support for [Cluster][redis-cluster], [Sentinel][redis-sentinel], and more)
-* Koa-based webapp and API servers (uses HTTP/2 for production!)
-* Pagination built-in (using [ctx-paginate][])
-* RESTful API with BasicAuth and versioning
-* Automated job scheduler with cron and human-readable syntax (backed by [Mongoose][] and [Bree][])
-* Passport-based authentication and group-based (Unix-like) permissioning
-* Stripe-inspired error handling
-* Mongoose and MongoDB with common database plugins
-* Email template engine with [Nodemailer][] and local rendering
-* Proxy eliminates need for Nginx reverse-proxy or Apache virtual hosts
-* Multilingual through built-in i18n translation support ([see configuration](#translation-configuration))
-* Automatic phrase translation with Google Translate
-* Sitemap generator for simple SEO
+* Redis, sessions, 和 flash toast 以及 模态 [SweetAlert2](https://limonte.github.io/sweetalert2/) messages (使用 [ioredis](https://github.com/luin/ioredis) 它支持 [Cluster](https://redis.io/topics/cluster-tutorial), [Sentinel](https://redis.io/topics/sentinel)等)
+* 基于Koa的webapp 和 API servers (生产环境使用HTTP/2)
+* 内置分页 (使用 [ctx-paginate](https://github.com/koajs/ctx-paginate))
+* RESTful API 使用 BasicAuth 和 versioning
+* 自动化的计划任务和便于人阅读的语法(由 [Mongoose](http://mongoosejs.com/) 和 [Bree](https://jobscheduler.net/) 提供支持)
+* Passport-based 的身份校验 和 group-based (Unix-like) 权限许可
+* 受Stripe启发的错误处理
+* 有通用的数据库插件的 Mongoose 和 MongoDB 
+* 邮件模板引擎和本地渲染 [Nodemailer](https://nodemailer.com/)
+* 内置代理，不再需要Nginx 反向代理或 Apache 虚拟主机
+* 内置的国际化翻译支持多种语言 ([详细配置](#translation-configuration))
+* 使用Google Translate进行自动短语翻译
+* 可用于简单SEO的站点地图生成器
 * …
 
-### Translation
+### 翻译
 
-Finally a framework that solves i18n everywhere; complete with automatic translation.
+框架的国际化最终由自动翻译完成.
 
-* Translation constants built-in so you [don't repeat yourself][dry]
-* Webapp error messages and templates are translated
-* Emails are translated
-* API responses are translated
-* Database errors are translated
-* Authentication errors are translated
+* 翻译内建常量，不需重复翻译.
+* 翻译Webapp 的错误消息和模板.
+* 翻译Emails
+* 翻译API 响应
+* 翻译数据库错误消息
+* 翻译身份校验错误
 * …
 
-### Email Engine
+### Email 引擎
 
-Our beautiful email engine uses [email-templates][] (which is also made by the creator of Lad)!
+我们的Email引擎使用了邮件模板 [email-templates](https://github.com/niftylettuce/node-email-templates) (这也是Lad作者的作品)!
 
-* Test your emails locally with automatic browser-rendering on the fly
-* Automatically inlines CSS for cross-browser and cross-platform email client support
-* Use [Bootstrap][] in your email template designs
-* Reuse your existing CSS and webapp styling
-* Use any template engine (defaults to Pug)
-* [Render custom fonts in emails with code][custom-fonts-in-emails]
-* [Add icons with Font Awesome with code][font-awesome-assets]
-* [Automatically avoid email client caching][nodemailer-base64-to-s3]
-* Include any image you want and it will be properly rendered
-* Rids the need for awkward embedded image CID attachments
+* 本地测试测试你的emails,同时能快速的浏览器快速渲染.
+* 自动创建内联css,提供跨浏览器和扩平台的email客户端支持.
+* 在email模板设计中使用 [Bootstrap](https://getbootstrap.com/) .
+* 重用已经存在的CSS和Webapp样式
+* 可以任意选择模板引擎 (默认是Pug)
+* [使用代码在email中渲染自定义的字体](https://github.com/ladjs/custom-fonts-in-emails)
+* [使用代码添加Font-awesome图标](https://github.com/ladjs/font-awesome-assets)
+* [自动禁用email客户端缓存](https://github.com/ladjs/nodemailer-base64-to-s3)
+* 任何图片都能添加并正确渲染.
+* 无需笨拙的嵌入式图像 CID附件
 * …
 
-### Error Handling
+### 错误处理
 
-We've spent a lot of time designing a beautiful error handler.
+我们花了很长时间设计这个优美的错误处理器
 
-* Supports `text/html`, `application/json`, and `text` response types
-* [User-friendly responses](https://github.com/niftylettuce/koa-better-error-handler#user-friendly-responses)
-* [HTML error lists](https://github.com/niftylettuce/koa-better-error-handler#html-error-lists)
+* 支持 `text/html`, `application/json`, and `text` 响应类型
+* [对用户友好的响应](https://github.com/niftylettuce/koa-better-error-handler#user-friendly-responses)
+* [HTML 错误列表](https://github.com/niftylettuce/koa-better-error-handler#html-error-lists)
 * …
 
-See [koa-better-error-handler][] for a complete reference.
+完整信息请参阅 [koa-better-error-handler](https://github.com/niftylettuce/koa-better-error-handler).
 
-### Performance
+### 性能
 
-* Compression and zero-bloat approach
-* Stream-based file uploading
-* Graceful reloading, shutdown, and reconnection handling
-* Manifest asset revisioning
-* Amazon S3 and CloudFront ready
+* 压缩和零膨胀的数据处理
+* 基于Stream的文件上传
+* 优雅的重载，关闭以及重连
+* Manifest asset 修改
+* Amazon S3 和 CloudFront 立马可用 
 * …
 
-### Security
+### 安全
 
-* Database security plugins and helpers
-* Automated tests and code coverage
-* CORS, SameSite set to "lax" ([an alternative to CSRF][csrf-alternative]), CSRF (since [not all browsers][csrf-caniuse] support SameSite yet) XSS, and rate limited protection
-* Dotenv support for environment-based configurations
-* App, user, and request-based logging
-* SSL-ready (see [instructions below](#ssl-configuration))
+* 数据库安全插件和帮助函数
+* 自动化测试 全代码覆盖
+* CORS, SameSite 设置为 "lax" ([一种CSRF的替代](https://scotthelme.co.uk/csrf-is-dead/)), CSRF (由于[并非所有浏览器](https://caniuse.com/#search=SameSite) 都支持同源策略) XSS, 以及节流保护
+* Dotenv 支持环境变量配置
+* App、user和基于请求的日志
+* SSL-ready (请参阅 [SSL 配置](#ssl-configuration))
 * …
 
 
-## Get Started
+## 快速上手
 
-We strictly support Mac and Ubuntu-based operating systems (we do not support Windows).
+高情商：我们严格支持Mac和Ubuntu系统. 低情商：**我们不支持Windows**.
 
-### Requirements
+### 要求
 
-Please ensure your operating system has the following software installed:
+请确保你的操作系统已经安装以下软件:
 
-* [Git][] - see [GitHub's tutorial][github-git] for installation
+* [Git](https://git-scm.com/) - 安装教程请参阅 [GitHub's tutorial](https://help.github.com/articles/set-up-git/)
 
-* [Node.js][node] (v10+) - use [nvm][] to install it on any OS
+* [Node.js](https://nodejs.org/) (v10+) - 使用 [nvm](https://github.com/creationix/nvm) 安装于任意系统
 
-  * After installing `nvm` you will need to run `nvm install node`
-  * We also recommend you install [yarn][], which is an alternative to [npm][]
+  * 安装`nvm`后 你需要运行 `nvm install node`
+  * 我们同时也建议你安装 [yarn](https://yarnpkg.com/), 是可以替代[npm](https://www.npmjs.com/)的另一种包管理器.
 
-* [MongoDB][] (v3.x+):
+* [MongoDB](https://www.mongodb.com/) (v3.x+):
 
-  * Mac (via [brew][]): `brew tap mongodb/brew && brew install mongodb-community && brew services start mongodb-community`.
+  * Mac (使用[brew](https://brew.sh/)): `brew tap mongodb/brew && brew install mongodb-community && brew services start mongodb-community`.
   * Ubuntu:
 
     ```sh
@@ -166,9 +166,9 @@ Please ensure your operating system has the following software installed:
     sudo apt-get -y install mongodb-org
     ```
 
-* [Redis][] (v4.x+):
+* [Redis](https://redis.io/) (v4.x+):
 
-  * Mac (via [brew][]): `brew install redis && brew services start redis`
+  * Mac (使用 [brew](https://brew.sh/)): `brew install redis && brew services start redis`
   * Ubuntu:
 
     ```sh
@@ -177,19 +177,21 @@ Please ensure your operating system has the following software installed:
     sudo apt-get -y install redis-server
     ```
 
-### Install
-
-[npm][]:
-
-```sh
-npm install -g lad
-```
-
-[yarn][]:
-
-```sh
+### 安装
+<code-group>
+<code-block title="YARN">
+```bash
 yarn global add lad
 ```
+</code-block>
+
+<code-block title="NPM">
+```bash
+npm install -g lad
+```
+</code-block>
+</code-group>
+
 
 ### Usage
 

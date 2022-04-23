@@ -1686,6 +1686,11 @@ alphanum-sort@^1.0.0:
   resolved "https://registry.npmmirror.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
   integrity sha512-0FcBfdcmaumGPQ0qPn7Q5qTgz/ooXgIyp1rf8ik5bGX8mpE2YHjC0P/eyQvxu1GURYQgq9ozf2mteQ5ZD9YiyQ==
 
+animate.css@^3.7.2:
+  version "3.7.2"
+  resolved "https://registry.npmmirror.com/animate.css/-/animate.css-3.7.2.tgz#e73e0d50e92cb1cfef1597d9b38a9481020e08ea"
+  integrity sha512-0bE8zYo7C0KvgOYrSVfrzkbYk6IOTVPNqkiHg2cbyF4Pq/PXzilz4BRWA3hwEUBoMp5VBgrC29lQIZyhRWdBTw==
+
 ansi-align@^3.0.0:
   version "3.0.1"
   resolved "https://registry.npmmirror.com/ansi-align/-/ansi-align-3.0.1.tgz#0cdf12e111ace773a86e9a1fad1225c43cb19a59"
@@ -8141,6 +8146,13 @@ vuepress-plugin-smooth-scroll@^0.0.3:
   integrity sha512-qsQkDftLVFLe8BiviIHaLV0Ea38YLZKKonDGsNQy1IE0wllFpFIEldWD8frWZtDFdx6b/O3KDMgVQ0qp5NjJCg==
   dependencies:
     smoothscroll-polyfill "^0.4.3"
+
+vuepress-plugin-toolbar@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmmirror.com/vuepress-plugin-toolbar/-/vuepress-plugin-toolbar-1.0.1.tgz#3e39e879d97a5510e443d6664e65e8ef4ebfea3d"
+  integrity sha512-r2tbkm7LaXdBxEIvKgLtHDgV7GCdHYrXIrNgjDbC9jxccWdSJmn5nb1BJnXgArkgnXGob5lSUn19ncrc9BQKlQ==
+  dependencies:
+    animate.css "^3.7.2"
 
 vuepress@^1.9.7:
   version "1.9.7"

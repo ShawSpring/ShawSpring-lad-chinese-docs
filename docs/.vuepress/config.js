@@ -26,7 +26,6 @@ module.exports = {
 
     /*  插件配置 */
     plugins: [
-        // 'one-click-copy',
         ['vuepress-plugin-code-copy',
             {
                 align: 'bottom',
@@ -37,6 +36,32 @@ module.exports = {
                 staticIcon: false,
             }
         ],
+        /* 弹窗可以安装这个插件 */
+        // @vuepress-reco/vuepress-plugin-bulletin-popover
+        
+        /* 可以展示二维码 打赏 拉群之类的 */
+        // ["vuepress-plugin-toolbar",
+        //     {
+        //         "opts": [
+        //             {
+        //                 icon: '',
+        //                 name: '二维码',
+        //                 link: '',
+        //                 popover: {
+        //                     title: '使用 Base64 来作为图片源',
+        //                     type: 'image',
+        //                     imageUrl: 'data:image/png;base64,这里是 Base64图片编码代码作为图片源',
+        //                     more: {
+        //                         newWindow: false,
+        //                         link: '/vuepress-plugin/vuepress-plugin-toolbar/',
+        //                         name: '了解更多'
+        //                     }
+        //                 }
+        //             }
+        //         ]
+        //     }
+        // ]
+        /* 需要vuepress 2 目前使用不了 */
         // ["vuepress-plugin-giscus",{
         //     repo:"ShawSpring/giscus",
         //     repoId:"R_kgDOHOIqlw",

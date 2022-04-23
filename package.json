@@ -24,6 +24,7 @@
     "vuepress": "^1.9.7"
   },
   "dependencies": {
-    "vuepress-plugin-code-copy": "^1.0.6"
+    "vuepress-plugin-code-copy": "^1.0.6",
+    "vuepress-plugin-toolbar": "^1.0.1"
   }
 }
