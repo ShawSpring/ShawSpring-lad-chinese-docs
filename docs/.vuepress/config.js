@@ -1,6 +1,6 @@
 const themeConfig = require("./themeConfig")
 module.exports = {
-    base:"/ShawSpring-lad-chinese-docs/",
+    // base:"/ShawSpring-lad-chinese-docs/",
     // 站点配置
     lang: 'zh-CN',
     title: 'Lad中文文档',
