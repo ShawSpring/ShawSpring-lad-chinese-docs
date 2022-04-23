@@ -31,12 +31,12 @@ module.exports = {
     //   editLinkText: '帮助我们改善此页面！',  // 默认为 "编辑此页面"
     // 假如你的文档仓库和项目本身不在一个仓库
     edit: {
-        docsPlatform: 'https://gitee.com/',  // 填写 Git 服务商链接
-        docsRepo: 'shawspring/lad-chinese-docs.git',  // 填写 Git 文档仓库
-        docsBranch: 'master',  //  填写 Git 文档仓库分支，默认 `master`
+        docsPlatform: 'https://github.com/',  // 填写 Git 服务商链接
+        docsRepo: 'ShawSpring/ShawSpring-lad-chinese-docs',  // 填写 Git 文档仓库
+        docsBranch: 'main',  //  填写 Git 文档仓库分支，默认 `master`
         docsDir: 'docs',  // 填写 Git 文档根目录
     },
-
+// https://github.com/ShawSpring/ShawSpring-lad-chinese-docs/edit/main/docs/README.md
     sidebar:"auto",
 
     sidebarDepth: 4,
