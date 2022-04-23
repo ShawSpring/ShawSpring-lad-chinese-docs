@@ -612,3 +612,4 @@ In order for your assets to get properly served in a production environment, you
 * [Subscribe to our Twitch channel][twitch]
 * [Visit Koa's Community section](https://github.com/koajs/koa#community).
 * [Join Mongoose's Slack channel][mongoose-slack]
+
