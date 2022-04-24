@@ -6,7 +6,7 @@ module.exports = {
     title: 'Lad中文文档',
     description: 'Lad框架中文文档',
     head: [
-        // ['link', { rel: 'icon', href: '/favicon.ico' }],
+        ['link', { rel: 'icon', href: '/favicon.ico' }],
         ['meta', { name: 'application-name', content: 'Lad框架中文文档' }],
     ],
     locales: {
@@ -61,6 +61,7 @@ module.exports = {
         //         ]
         //     }
         // ]
+
         /* 需要vuepress 2 目前使用不了 */
         // ["vuepress-plugin-giscus",{
         //     repo:"ShawSpring/giscus",
@@ -68,23 +69,6 @@ module.exports = {
         //     // category:"Announcements",
         //     // categoryId:"DIC_kwDOHOIql84COuvs"
         // }]
-
-        /* <script src="https://giscus.app/client.js"
-      data-repo="ShawSpring/giscus"
-      data-repo-id="R_kgDOHOIqlw"
-      data-category="Announcements"
-      data-category-id="DIC_kwDOHOIql84COuvs"
-      data-mapping="pathname"
-      data-reactions-enabled="1"
-      data-emit-metadata="0"
-      data-input-position="top"
-      data-theme="light"
-      data-lang="zh-CN"
-      data-loading="lazy"
-      crossorigin="anonymous"
-      async>
-</script>
-*/
     ],
     // 主题和它的配置
     // theme: '@vuepress/theme-default',
