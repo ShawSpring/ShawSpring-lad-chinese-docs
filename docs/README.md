@@ -486,71 +486,72 @@ yarn test
 我们使用下列3个包来管理配置:
 
 * [dotenv-extended](https://github.com/niftylettuce/node-dotenv-extended) - 允许我们在名为`.env.schema`的文件中创建 `.env` 定义 (也叫做"schema")
-* [mustache](https://github.com/janl/mustache.js/) - allows us to use the [Mustache templating language](https://github.com/janl/mustache.js/) in our `.env` and `.env.defaults` configuration files
-* [dotenv-parse-variables](https://github.com/niftylettuce/dotenv-parse-variables) - automatically parses variable types from `process.env` (e.g. `FOO=4` will set `process.env.FOO = 4` with a `Number` variable type instead of a `String`)
+* [mustache](https://github.com/janl/mustache.js/) - 允许我们在`.env` 和 `.env.defaults` 配置文件中使用 [Mustache templating language](https://github.com/janl/mustache.js/) 
+* [dotenv-parse-variables](https://github.com/niftylettuce/dotenv-parse-variables) - 从`process.env`中自动解析变量类型 (例如: `FOO=4` 会设置成 `process.env.FOO = 4` FOO设置成`Number`类型而不是 `String`)
 
-Configuration is managed by the following, in order of priority:
+配置管理的优先级顺序如下:
 
-1. Contents of the file at `config/index.js` (reads in `process.env` environment variables)
-2. Contents of the files in directories under `config/environments/` (sets defaults per environment, e.g. you can pass `NODE_ENV=staging` and it will load the file at `config/environments/staging.js`)
-3. Environment variables used to override defaults or set required ones (e.g. `NODE_ENV=production`)
-4. Environment configuration in `.env`
-5. Environment configuration in `.env.defaults`
+1. `config/index.js` 文件中的内容 (从`process.env`中读取环境变量)
+2. `config/environments/` 目录下的文件内容 (为每个环境变量设置默认值, e.g. 你可以设置 `NODE_ENV=staging` 然后会加载`config/environments/staging.js`) <!-- XXX:是加载这个文件还在这个文件中列出的文件呢？不确定 -->
+3. 用来覆盖默认值或者设置所需的环境变量 (e.g. `NODE_ENV=production`)
+4. `.env` 中设置的环境变量
+5. `.env.defaults`中的环境变量
 
-Precedence is taken by the environment configuration files, environment variables, then the `.env` file.
+顺序为环境配置文件，环境变量， `.env` 文件.  
 
-Basically [dotenv](https://github.com/motdotla/dotenv) won't set an environment variable if it already detects it was passed as an environment variable.
+<!-- XXX:下面这句翻译怪的 -->
+基本上， [dotenv](https://github.com/motdotla/dotenv)如果检测到它作为环境变量传递，则不会设置环境变量。(译者注:它指代什么不清楚,这句话怪怪的)
 
-Take a look at the [config](template/config) folder contents and also at the defaults at [.env.defaults](template/.env.defaults).
+[config](https://lad.js.org/template/config) 文件夹下及默认值[.env.defaults](https://lad.js.org/template/.env.defaults)的内容如下.
 
-* `NODE_ENV` - (options: `development`, `production` default: `development`) - the node environment the app is running in
-* `PROXY_PORT` - (default: `8080`) - proxy port used to proxy requests (see [ladjs/proxy][])
-* `HTTP_PROTOCOL` - (defaults: `http` recommend: `https`) - protocol used for http requests
+* `NODE_ENV` - (options: `development`, `production` default: `development`) - node 运行的环境
+* `PROXY_PORT` - (default: `8080`) - 代理请求用的代理端口 (see [ladjs/proxy](https://github.com/ladjs/proxy))
+* `HTTP_PROTOCOL` - (defaults: `http` recommend: `https`) - http 协议(protocol)
 * `HTTP_PORT` - (defaults: `80` recommend: `443`) - http port used for http requests
-* `WEB_PROTOCOL` - (default: `http`) - [ladjs/web][] application protocol
-* `WEB_HOST` - (default: `localhost`) - [ladjs/web][] application host
-* `WEB_PORT` - (default: `3000`) - [ladjs/web][] application port
+* `WEB_PROTOCOL` - (default: `http`) - [ladjs/web](https://github.com/ladjs/web) application protocol
+* `WEB_HOST` - (default: `localhost`) - [ladjs/web](https://github.com/ladjs/web) application host
+* `WEB_PORT` - (default: `3000`) - [ladjs/web](https://github.com/ladjs/web) application port
 * `WEB_URL` - (default: `{{WEB_PROTOCOL}}://{{WEB_HOST}}:{{WEB_PORT}}`) - web application absolute URI
-* `WEB_SSL_KEY_PATH` - [ladjs/web][] file path to your SSL key file
-* `WEB_SSL_CERT_PATH` - [ladjs/web][] file path to your SSL certificate file
-* `WEB_SSL_CA_PATH` - [ladjs/web][] file path to your SSL certificate authority file
-* `API_HOST` - (default: `localhost`) - [ladjs/api][] host
-* `API_PORT` - (default: `4000`) - [ladjs/api][] port
-* `API_PROTOCOL` - (default: `http` recommend: `https`) - [ladjs/api][] protocol
-* `API_URL` - (default: `{{API_PROTOCOL}}://{{API_HOST}}:{{API_PORT}}`) - [ladjs/api][] absolute URI
-* `API_SSL_KEY_PATH` - [ladjs/api][] file path to your SSL key file
-* `API_SSL_CERT_PATH` - [ladjs/api][] file path to your SSL certificate file
-* `API_SSL_CA_PATH` - [ladjs/api][] file path to your SSL certificate authority file
-* `API_RATELIMIT_WHITELIST` - [ladjs/api][] ratelimiter whitelisted ips (see: [koa-simple-ratelimit](https://github.com/scttcper/koa-simple-ratelimit))
+* `WEB_SSL_KEY_PATH` - [ladjs/web](https://github.com/ladjs/web) file path to your SSL key file
+* `WEB_SSL_CERT_PATH` - [ladjs/web](https://github.com/ladjs/web) file path to your SSL certificate file
+* `WEB_SSL_CA_PATH` - [ladjs/web](https://github.com/ladjs/web) file path to your SSL certificate authority file
+* `API_HOST` - (default: `localhost`) - [ladjs/api](https://github.com/ladjs/api) host
+* `API_PORT` - (default: `4000`) - [ladjs/api](https://github.com/ladjs/api) port
+* `API_PROTOCOL` - (default: `http` recommend: `https`) - [ladjs/api](https://github.com/ladjs/api) protocol
+* `API_URL` - (default: `{{API_PROTOCOL}}://{{API_HOST}}:{{API_PORT}}`) - [ladjs/api](https://github.com/ladjs/api) absolute URI
+* `API_SSL_KEY_PATH` - [ladjs/api](https://github.com/ladjs/api) file path to your SSL key file
+* `API_SSL_CERT_PATH` - [ladjs/api](https://github.com/ladjs/api) file path to your SSL certificate file
+* `API_SSL_CA_PATH` - [ladjs/api](https://github.com/ladjs/api) file path to your SSL certificate authority file
+* `API_RATELIMIT_WHITELIST` - [ladjs/api](https://github.com/ladjs/api) ratelimiter whitelisted ips (see: [koa-simple-ratelimit](https://github.com/scttcper/koa-simple-ratelimit))
 * `APP_NAME` - (default: `Lad`) - application name (see [usage](https://github.com/search?p=3\&q=org%3Aladjs+appName\&type=Code))
 * `APP_COLOR` - application color theme (see [usage](https://github.com/search?q=org%3Aladjs+appColor\&type=Code))
 * `TWITTER` - (default: `@niftylettuce`) twitter handle
 * `SEND_EMAIL` - (default: `false`) - whether to send email or preview (see [outbound email configuration](https://github.com/ladjs/lad#outbound-email-configuration))
 * `TRANSPORT_DEBUG` - (default: `false`) - email transport debug logging (see [debugging](https://github.com/ladjs/lad#debugging))
 * `EMAIL_DEFAULT_FROM` - (default: `support@127.0.01`) - default email `from` address
-* `SHOW_STACK` - (default: `true`) - whether or not to output a stack trace when logging (see [cabinjs options][])
-* `SHOW_META` - (default: `true`) - whether or not to output metadata to logger methods (see [cabinjs options][])
+* `SHOW_STACK` - (default: `true`) - whether or not to output a stack trace when logging (see [cabinjs options](https://github.com/cabinjs/axe#options))
+* `SHOW_META` - (default: `true`) - whether or not to output metadata to logger methods (see [cabinjs options](https://github.com/cabinjs/axe#options))
 * `SUPPORT_REQUEST_MAX_LENGTH` - (default: `500`) - support request max message size in characters
 * `ERROR_HANDLER_BASE_URL` - (default: `{{WEB_URL}}`) error handling base url (see [koa-better-error-handler](https://github.com/ladjs/koa-better-error-handler))
-* `I18N_SYNC_FILES` - (default: `true`) - sync locale information across all files (see [ladjs/i18n options][])
-* `I18N_AUTO_RELOAD` - (default: `false`) - watch for changes in json files to reload locale on updates (see [ladjs/i18n options][])
-* `I18N_UPDATE_FILES` - (default: `true`) - write new locale information to disk (see [ladjs/i18n options][])
-* `AUTH_LOCAL_ENABLED` - (default: `true`) - enable passport local strategy (see [ladjs/passport][])
-* `AUTH_FACEBOOK_ENABLED` - (default: `false`) - enable authenticating with Facebook using the OAuth 2.0 (see [ladjs/passport][])
-* `AUTH_TWITTER_ENABLED` - (default: `false`) - enable authenticating with Twitter using the OAuth 1.0 (see [ladjs/passport][])
-* `AUTH_GOOGLE_ENABLED` - (default: `false`) - enable authenticating with Google using OAuth 2.0 (see [google auth][])
-* `AUTH_GITHUB_ENABLED` - (default: `false`) - enable authenticating with Github using OAuth 2.0 (see [ladjs/passport][])
-* `AUTH_LINKEDIN_ENABLED` - (default: `false`) - enable authenticating with LinkedIn using OAuth 1.0 (see [ladjs/passport][])
-* `AUTH_INSTAGRAM_ENABLED` - (default: `false`) - enable authenticating with Instagram using OAuth 2.0 (see [ladjs/passport][])
-* `AUTH_OTP_ENABLED` - (default: `false`) - enable authenticating with OTP, a form of two-factor authentication (see [ladjs/passport][])
-* `AUTH_STRIPE_ENABLED` - (default: false) - enable authenticating with Stripe using OAuth 2.0 (see [ladjs/passport][])
-* `GOOGLE_CLIENT_ID` - google oauth2 client id (see [google auth][])
-* `GOOGLE_CLIENT_SECRET` - google oauth2 secret (see [google auth][])
-* `GOOGLE_CALLBACK_URL` - google oauth2 callback url (see [google auth][])
+* `I18N_SYNC_FILES` - (default: `true`) - sync locale information across all files (see [ladjs/i18n options](https://github.com/ladjs/i18n#options))
+* `I18N_AUTO_RELOAD` - (default: `false`) - watch for changes in json files to reload locale on updates (see [ladjs/i18n options](https://github.com/ladjs/i18n#options))
+* `I18N_UPDATE_FILES` - (default: `true`) - write new locale information to disk (see [ladjs/i18n options](https://github.com/ladjs/i18n#options))
+* `AUTH_LOCAL_ENABLED` - (default: `true`) - enable passport local strategy (see [ladjs/passport](https://github.com/ladjs/passport))
+* `AUTH_FACEBOOK_ENABLED` - (default: `false`) - enable authenticating with Facebook using the OAuth 2.0 (see [ladjs/passport](https://github.com/ladjs/passport))
+* `AUTH_TWITTER_ENABLED` - (default: `false`) - enable authenticating with Twitter using the OAuth 1.0 (see [ladjs/passport](https://github.com/ladjs/passport))
+* `AUTH_GOOGLE_ENABLED` - (default: `false`) - enable authenticating with Google using OAuth 2.0 (see [google auth](https://github.com/ladjs/lad#google-auth))
+* `AUTH_GITHUB_ENABLED` - (default: `false`) - enable authenticating with Github using OAuth 2.0 (see [ladjs/passport](https://github.com/ladjs/passport))
+* `AUTH_LINKEDIN_ENABLED` - (default: `false`) - enable authenticating with LinkedIn using OAuth 1.0 (see [ladjs/passport](https://github.com/ladjs/passport))
+* `AUTH_INSTAGRAM_ENABLED` - (default: `false`) - enable authenticating with Instagram using OAuth 2.0 (see [ladjs/passport](https://github.com/ladjs/passport))
+* `AUTH_OTP_ENABLED` - (default: `false`) - enable authenticating with OTP, a form of two-factor authentication (see [ladjs/passport](https://github.com/ladjs/passport))
+* `AUTH_STRIPE_ENABLED` - (default: false) - enable authenticating with Stripe using OAuth 2.0 (see [ladjs/passport](https://github.com/ladjs/passport))
+* `GOOGLE_CLIENT_ID` - google oauth2 client id (see [google auth](https://github.com/ladjs/lad#google-auth))
+* `GOOGLE_CLIENT_SECRET` - google oauth2 secret (see [google auth](https://github.com/ladjs/lad#google-auth))
+* `GOOGLE_CALLBACK_URL` - google oauth2 callback url (see [google auth](https://github.com/ladjs/lad#google-auth))
 * `GOOGLE_APPLICATION_CREDENTIALS` - path to google cloud platform credentials (see [gcp credentials](https://cloud.google.com/docs/authentication/getting-started))
-* `GITHUB_CLIENT_ID` - github oauth client id (see [ladjs/passport][])
-* `GITHUB_CLIENT_SECRET` - github oauth secret (see [ladjs/passport][])
-* `GITHUB_CALLBACK_URL` - github oauth callback URL (see [ladjs/passport][])
+* `GITHUB_CLIENT_ID` - github oauth client id (see [ladjs/passport](https://github.com/ladjs/passport))
+* `GITHUB_CLIENT_SECRET` - github oauth secret (see [ladjs/passport](https://github.com/ladjs/passport))
+* `GITHUB_CALLBACK_URL` - github oauth callback URL (see [ladjs/passport](https://github.com/ladjs/passport))
 * `POSTMARK_API_TOKEN` - postmark api token (see [outbound email configuration](https://github.com/ladjs/lad#outbound-email-configuration))
 * `CODECOV_TOKEN` - codecov api token (see [continuous integration and code coverage](https://github.com/ladjs/lad#continuous-integration-and-code-coverage))
 * `MONGO_USER` - mongodb username
@@ -559,109 +560,109 @@ Take a look at the [config](template/config) folder contents and also at the def
 * `MONGO_PORT` - (default: `27017`) - mongodb port
 * `MONGO_NAME` - (default: `{{APP_NAME}}_{{NODE_ENV}}`) - mongodb name
 * `MONGO_URI` - (default: `mongodb://{{MONGO_HOST}}:{{MONGO_PORT}}/{{MONGO_NAME}}`) - mongodb connection URI
-* `WEB_MONGO_USER` - [ladjs/web][] mongodb username
-* `WEB_MONGO_PASS` - [ladjs/web][] mongodb password
-* `WEB_MONGO_HOST` - [ladjs/web][] mongodb hostname
-* `WEB_MONGO_NAME` - [ladjs/web][] mongodb name
-* `WEB_MONGO_PORT` - [ladjs/web][] mongodb port
-* `WEB_MONGO_URI` - [ladjs/web][] mongodb connection URI
-* `API_MONGO_USER` - [ladjs/api][] mongodb username
-* `API_MONGO_PASS` - [ladjs/api][] mongodb password
-* `API_MONGO_HOST` - [ladjs/api][] mongodb hostname
-* `API_MONGO_NAME` - [ladjs/api][] mongodb name
-* `API_MONGO_PORT` - [ladjs/api][] mongodb port
-* `API_MONGO_URI` - [ladjs/api][] mongodb connection URI
-* `BREE_MONGO_USER` - [breejs/bree][] mongodb username
-* `BREE_MONGO_PASS` - [breejs/bree][] mongodb password
-* `BREE_MONGO_HOST` - [breejs/bree][] mongodb hostname
-* `BREE_MONGO_NAME` - [breejs/bree][] mongodb name
-* `BREE_MONGO_PORT` - [breejs/bree][] mongodb port
-* `BREE_MONGO_URI` - [breejs/bree][] mongodb connection URI
+* `WEB_MONGO_USER` - [ladjs/web](https://github.com/ladjs/web) mongodb username
+* `WEB_MONGO_PASS` - [ladjs/web](https://github.com/ladjs/web) mongodb password
+* `WEB_MONGO_HOST` - [ladjs/web](https://github.com/ladjs/web) mongodb hostname
+* `WEB_MONGO_NAME` - [ladjs/web](https://github.com/ladjs/web) mongodb name
+* `WEB_MONGO_PORT` - [ladjs/web](https://github.com/ladjs/web) mongodb port
+* `WEB_MONGO_URI` - [ladjs/web](https://github.com/ladjs/web) mongodb connection URI
+* `API_MONGO_USER` - [ladjs/api](https://github.com/ladjs/api) mongodb username
+* `API_MONGO_PASS` - [ladjs/api](https://github.com/ladjs/api) mongodb password
+* `API_MONGO_HOST` - [ladjs/api](https://github.com/ladjs/api) mongodb hostname
+* `API_MONGO_NAME` - [ladjs/api](https://github.com/ladjs/api) mongodb name
+* `API_MONGO_PORT` - [ladjs/api](https://github.com/ladjs/api) mongodb port
+* `API_MONGO_URI` - [ladjs/api](https://github.com/ladjs/api) mongodb connection URI
+* `BREE_MONGO_USER` - [breejs/bree](https://github.com/breejs/bree) mongodb username
+* `BREE_MONGO_PASS` - [breejs/bree](https://github.com/breejs/bree) mongodb password
+* `BREE_MONGO_HOST` - [breejs/bree](https://github.com/breejs/bree) mongodb hostname
+* `BREE_MONGO_NAME` - [breejs/bree](https://github.com/breejs/bree) mongodb name
+* `BREE_MONGO_PORT` - [breejs/bree](https://github.com/breejs/bree) mongodb port
+* `BREE_MONGO_URI` - [breejs/bree](https://github.com/breejs/bree) mongodb connection URI
 * `REDIS_PORT` - (default: `6379`) - redis port
 * `REDIS_HOST` - (default: `localhost`) - redis hostname
 * `REDIS_PASSWORD` - redis password
-* `WEB_REDIS_PORT` - [ladjs/web][] redis port
-* `WEB_REDIS_HOST` - [ladjs/web][] redis hostname
-* `WEB_REDIS_PASSWORD` - [ladjs/web][] redis password
-* `API_REDIS_PORT` - [ladjs/api][] redis port
-* `API_REDIS_HOST` - [ladjs/api][] redis hostname
-* `API_REDIS_PASSWORD` - [ladjs/api][] redis password
-* `BREE_REDIS_PORT` - [breejs/bree][] redis port
-* `BREE_REDIS_HOST` - [breejs/bree][] redis hostname
-* `BREE_REDIS_PASSWORD` - [breejs/bree][] redis password
-* `MANDARIN_REDIS_PORT` - [mandarin][] redis port
-* `MANDARIN_REDIS_HOST` - [mandarin][] redis hostname
-* `MANDARIN_REDIS_PASSWORD` - [mandarin][] redis password
-* `CERTBOT_WELL_KNOWN_NAME` - letsencrypt wellknown name (see [certbot options][])
-* `CERTBOT_WELL_KNOWN_CONTENTS` - letsencrypt wellknown contents (see [certbot options][])
+* `WEB_REDIS_PORT` - [ladjs/web](https://github.com/ladjs/web) redis port
+* `WEB_REDIS_HOST` - [ladjs/web](https://github.com/ladjs/web) redis hostname
+* `WEB_REDIS_PASSWORD` - [ladjs/web](https://github.com/ladjs/web) redis password
+* `API_REDIS_PORT` - [ladjs/api](https://github.com/ladjs/api) redis port
+* `API_REDIS_HOST` - [ladjs/api](https://github.com/ladjs/api) redis hostname
+* `API_REDIS_PASSWORD` - [ladjs/api](https://github.com/ladjs/api) redis password
+* `BREE_REDIS_PORT` - [breejs/bree](https://github.com/breejs/bree) redis port
+* `BREE_REDIS_HOST` - [breejs/bree](https://github.com/breejs/bree) redis hostname
+* `BREE_REDIS_PASSWORD` - [breejs/bree](https://github.com/breejs/bree) redis password
+* `MANDARIN_REDIS_PORT` - [mandarin](https://github.com/niftylettuce/mandarin) redis port
+* `MANDARIN_REDIS_HOST` - [mandarin](https://github.com/niftylettuce/mandarin) redis hostname
+* `MANDARIN_REDIS_PASSWORD` - [mandarin](https://github.com/niftylettuce/mandarin) redis password
+* `CERTBOT_WELL_KNOWN_NAME` - letsencrypt wellknown name (see [certbot options](https://certbot.eff.org/docs/using.html#id11))
+* `CERTBOT_WELL_KNOWN_CONTENTS` - letsencrypt wellknown contents (see [certbot options](https://certbot.eff.org/docs/using.html#id11))
 * `VERIFICATION_PIN_TIMEOUT_MS` - (default: `5m`) - email verification pin expiry
 * `VERIFICATION_PIN_EMAIL_INTERVAL_MS` - (default: `1m`) - email verification pin email interval
 * `API_SECRETS` - (default: `secret`) - list of restricted api secrets
 * `CACHE_RESPONSES` - (default: `false`) - cache specified responses (see [ladjs/koa-cache-responses](https://github.com/ladjs/koa-cache-responses))
 * `SLACK_API_TOKEN` - slack api token (see [slack web api](https://slack.dev/node-slack-sdk/web-api))
 
-#### SSL Configuration
+#### SSL 配置
 
-To configure SSL for the web or API server simply set them in your `.env` file or pass them as environment variables.
+要为 Web 或 API 服务器配置 SSL，只需在 .env 文件中设置它们或将它们作为环境变量传递
 
-> Web server:
+> Web 服务器:
 
-* `WEB_PROTOCOL` - you must set this to `https`
-* `WEB_SSL_KEY_PATH` - file path to your SSL key file (e.g. `/home/deploy/.ssl/web-key.pem`)
-* `WEB_SSL_CERT_PATH` - file path to your SSL certificate file (e.g. `/home/deploy/.ssl/web-cert.pem`)
-* `WEB_SSL_CA_PATH` (optional) - file path to your SSL certificate authority file (e.g. `/home/deploy/.ssl/web-ca-cert.pem`)
+* `WEB_PROTOCOL` - 必须设置为 `https`
+* `WEB_SSL_KEY_PATH` - SSL 秘钥的文件路径 (e.g. `/home/deploy/.ssl/web-key.pem`)
+* `WEB_SSL_CERT_PATH` - SSL 证书的文件路径 (e.g. `/home/deploy/.ssl/web-cert.pem`)
+* `WEB_SSL_CA_PATH` (可选) - SSL 证书颁发机构文件的文件路径 (e.g. `/home/deploy/.ssl/web-ca-cert.pem`)
 
-> API server:
+> API 服务器:
 
-* `API_PROTOCOL` - you must set this to `https`
-* `API_SSL_KEY_PATH` - file path to your SSL key file (e.g. `/home/deploy/.ssl/api-key.pem`)
-* `API_SSL_CERT_PATH` - file path to your SSL certificate file (e.g. `/home/deploy/.ssl/api-cert.pem`)
-* `API_SSL_CA_PATH` (optional) - file path to your SSL certificate authority file (e.g. `/home/deploy/.ssl/api-ca-cert.pem`)
+* `API_PROTOCOL` - 必须设置为 `https`
+* `API_SSL_KEY_PATH` - SSL 秘钥的文件路径 (e.g. `/home/deploy/.ssl/api-key.pem`)
+* `API_SSL_CERT_PATH` - SSL 证书的文件路径 (e.g. `/home/deploy/.ssl/api-cert.pem`)
+* `API_SSL_CA_PATH` (可选) - SSL 证书颁发机构文件的文件路径 (e.g. `/home/deploy/.ssl/api-ca-cert.pem`)
 
-#### Outbound Email Configuration
+#### 发出的 Email 配置
 
-By default in the development environment we simply render the email in your browser.
+默认情况下，在开发环境中，我们只是在您的浏览器中呈现电子邮件.
 
-However in other environments such as production, you definitely want emails to be sent.
+但是在其他环境（例如生产环境）中，您肯定希望电子邮件真的发送出去.
 
-We built-in support for Postmark by default (though you can swap in your own `transport` provider in the `jobs/email.js` file):
+默认情况下，我们内置了对邮戳 Postmark 的支持（尽管您可以在 `jobs/email.js` 文件中换成您自己的 `transport`:
 
-1. Go to [https://postmarkapp.com](https://postmarkapp.com?utm_source=lad) – Start Free Trial
+1. 访问 [https://postmarkapp.com](https://postmarkapp.com?utm_source=lad) – 开启免费体验
 
-2. Create a free trial account, then click Get Started, and proceed to create a "Server" and "Sender Signature"
+2. 创建一个免费账户, 然后点击`Get Started`, 然后创建一个"Server" 和 "Sender Signature"
 
-3. Copy/paste the "Server API token" under "Credentials" in your `.env` file (example below)
+3. 复制/粘贴`.env` 文件中"Credentials"下的"Server API token" (示例如下)
 
    ```diff
    -POSTMARK_API_TOKEN=
    +POSTMARK_API_TOKEN=ac6657eb-2732-4cfd-915b-912b1b10beb1
    ```
 
-4. Modify the `SEND_EMAIL` variable in `.env` from `false` to `true`
+4. 修改`.env`中`SEND_EMAIL` 变量的值， `false` 改为 `true`
 
-#### Favicon and Touch Icon Configuration
+#### Favicon 和 Touch Icon 图标配置
 
-You can customize the favicon and touch icons – just generate a new set at <https://realfavicongenerator.net> and overwrite the existing in the [assets](template/assets) folder.
+你可以自定义 favicon 和 touch icons – 只需在 <https://realfavicongenerator.net> 中生成一个并拿来覆盖 [assets](template/assets) 进文件夹.
 
-Just make sure that any relative paths match up in the `assets/browserconfig.xml` and `assets/manifest.json` files.
+只需确保 `assets/browserconfig.xml` 和 `assets/manifest.json` 文件中的任何相对路径都匹配
 
-#### Authentication Methods
+#### 身份认证Authentication 方法
 
-We use Lad's auth package under the hood; so if you want to configure authentication providers you'll want to read more or contribute to [@ladjs/auth][ladjs-auth].
+我们在后台使用 Lad 的 auth 包； 因此，如果您想配置身份验证模块，你可以参阅[@ladjs/auth](https://github.com/ladjs/auth)或为其添砖加瓦.
 
-##### Google Auth
+##### 谷歌身份校验 Google Auth
 
-In order to add Google sign-in to your app (so users can log in with their Google account):
+为了将 Google 登录添加到您的应用程序（以便用户可以使用他们的 Google 帐户登录）：:
 
-1. Go to <https://console.developers.google.com> – Create a project (and fill out your project information – if you need a 120x120px default image, [you can use this one](https://cdn.rawgit.com/ladjs/lad/82d38d64/media/lad-120x120.png) with a CDN path of <https://cdn.rawgit.com/ladjs/lad/82d38d64/media/lad-120x120.png>
+1. 访问 <https://console.developers.google.com> – 创建一个项目（并填写您的项目信息 – 如果您需要一个 120x120px 的默认图像，您可以使用[这个图片](https://cdn.rawgit.com/ladjs/lad/82d38d64/media/lad-120x120.png)的CDN <https://cdn.rawgit.com/ladjs/lad/82d38d64/media/lad-120x120.png>
 
-2. Under your newly created project, go to Credentials – Create credentials – OAuth client ID – Web application
+2. 在您新创建的项目下，依次 Credentials – Create credentials – OAuth client ID – Web application
 
-3. Set "Authorized JavaScript origins" to `http://yourdomain.com` (replace with your domain) and also `http://localhost:3000` (for local development)
+3. 设置 "Authorized JavaScript origins" 为 `http://yourdomain.com` (替换为你自己的域名) 和 `http://localhost:3000` (用于本地开发)
 
-4. Set "Authorized redirect URIs" to `http://yourdomain.com/auth/google/ok` (again, replace with your domain) and also `http://localhost:3000/auth/google/ok` (again, for local development)
+4. 设置 "Authorized redirect URIs" 为 `http://yourdomain.com/auth/google/ok` (替换为你自己的域名) 和 `http://localhost:3000/auth/google/ok` (用于本地开发)
 
-5. Copy and paste the newly created key pair for respective properties in your `.env` file (example below)
+5. 复制、粘贴新创建的秘钥对到`.env` 文件中 (示例如下)
 
    ```diff
    -GOOGLE_CLIENT_ID=
@@ -670,52 +671,53 @@ In order to add Google sign-in to your app (so users can log in with their Googl
    +GOOGLE_CLIENT_SECRET=Oys6WrHleTOksqXTbEY_yi07
    ```
 
-6. In `.env`, make sure that `AUTH_GOOGLE_ENABLED=true` to enable this authentication method.
+6. 在 `.env` 中，确保设置了 `AUTH_GOOGLE_ENABLED=true` 以启用此身份验证方法。
 
-#### Translation Configuration
+#### 翻译配置
 
-1. Go to <https://console.developers.google.com>
-2. Enable the Google Translate API
-3. Copy your API key and set it as the environment variable `GOOGLE_TRANSLATE_KEY=******`
+1. 访问 <https://console.developers.google.com>
+2. 启用 Google Translate API
+3. 复制你的 API key 并设置为环境变量 `GOOGLE_TRANSLATE_KEY=******`
 
 #### 持续继承和代码覆盖率测试
 
-We strongly recommend that you use [SemaphoreCI](https://semaphoreci.com/?ref=lad) for continuous integration and [Codecov][https://codecov.io/gh] for code coverage.
+我们强烈推荐使用 [SemaphoreCI](https://semaphoreci.com/?ref=lad) 作为持续集成, [Codecov][https://codecov.io/gh] 作为代码覆盖率测试的工具.
 
 Here are the simple steps required to setup [SemaphoreCI](https://semaphoreci.com/?ref=lad) with [Codecov][https://codecov.io/gh]:
 
-1. Go to [SemaphoreCI](https://semaphoreci.com/?ref=lad) and sign up for a free account
+1. 访问 [SemaphoreCI](https://semaphoreci.com/?ref=lad) 并注册一个免费账号.
 
-2. Once your repository is pushed to GitHub, add it as a project on SemaphoreCI
+2. 如果你的项目在Github上, 从Github导入项目到 SemaphoreCI
 
-3. Configure your project on SemaphoreCI with the following build settings:
+3. 使用如下构建设置，来配置你在SemaphoreCI上的项目.
 
-   > Replace `npm` with `yarn` if you're using [yarn](https://yarnpkg.com/) as your package manager
+   > 如果你使用`yarn`, 把`npm` 换为 `yarn` 
 
    * Language: `JavaScript`
    * Node.js version: `10+` (latest LTS)
      > Note you can also add to `Setup` the script `nvm install latest` to install latest version if SemaphoreCI does not provide it from the drop-down
+     >请注意，如果 SemaphoreCI 的下拉列表中未提供，您可以将 `nvm install latest` 添加到 `Setup` 以安装最新版本
    * Setup: `npm install`
    * Job 1: `npm run test-coverage`
    * After job: `npm run coverage`
 
-4. Go to [Codecov][https://codecov.io/gh] and sign up for a free account
+4. 访问 [Codecov][https://codecov.io/gh] 注册一个免费账号.
 
-5. Add your project on Codecov and copy to your clipboard the token
+5. 添加你的项目到 Codecov 并复制 Token 到剪贴板.
 
-6. Go to SemaphoreCI's Project Settings for your project and add `CODECOV_TOKEN` as an environment variable (with the contents from your clipboard)
+6. 到 SemaphoreCI 上你项目的设置 Settings, 添加环境变量 `CODECOV_TOKEN` (内容就是你上边剪贴板里的)
 
-7. Run a test build ("Rebuild last revision") on SemaphoreCI and check to make sure your code coverage report uploads properly on Codecov
+7. 在 SemaphoreCI 上运行测试构建（重建最新版本"Rebuild last revision"）并检查以确保您在 Codecov 上的代码覆盖率报告正确上传
 
-8. Ensure your `README.md` file has the build status and code coverage badges rendered properly (you will need to use a different badge link from each provider if your GitHub repository is private)
+8. 确保您的 `README.md` 文件具有正确呈现的构建状态和代码覆盖率标记（如果您的 GitHub 存储库是私有的，您将需要使用来自每个提供商的不同标记链接）
 
-#### Amazon S3 and CloudFront Asset Setup
+#### Amazon S3 and CloudFront Assert 设置 
 
-In order for your assets to get properly served in a production environment, you'll need to configure AWS:
+为了让您的程序资产在生产环境中得到正确服务，您需要配置 AWS：
 
-1. Go to <https://console.aws.amazon.com/iam/home#security_credential> ‐ Access Keys – Create New Access Key
+1. 访问并跳转 <https://console.aws.amazon.com/iam/home#security_credential> ‐ Access Keys – Create New Access Key
 
-2. Copy and paste the newly created key pair for respective properties in your `.env` file (example below)
+2. 将新创建的密钥对复制并粘贴到 `.env` 文件中（示例如下）
 
    ```diff
    -AWS_IAM_KEY=
@@ -724,25 +726,24 @@ In order for your assets to get properly served in a production environment, you
    +AWS_IAM_SECRET=9MpR1FOXwPEtPlrlU5WbHjnz2KDcKWSUcB+C5CpS
    ```
 
-3. Enable your API by clicking on Overview and then clicking the Enable button
+3. 通过单击概览然后单击启用按钮启用您的 API
 
-4. Go to <https://console.aws.amazon.com/s3/home> – Create Bucket
+4. 访问 <https://console.aws.amazon.com/s3/home> – Create Bucket
 
-5. Create a bucket and copy/paste its name for the property in `.env` (example below)
+5. 创建一个bucket 然后复制粘贴到 `.env` 文件中 (示例如下)
 
    ```diff
    -AWS_S3_BUCKET=
    +AWS_S3_BUCKET=lad-development
    ```
 
-6. Go to <https://console.aws.amazon.com/cloudfront/home> – Create Distribution – Get Started
+6. 访问 <https://console.aws.amazon.com/cloudfront/home> – Create Distribution – Get Started
 
-7. Set "Origin Domain Name" equal to your S3 bucket name (their autocomplete drop-down will help you find it)
+7. 设置 "Origin Domain Name" 为你Amazon S3 上的 bucket name (通过下拉列表帮您填写)
 
-8. Leave the remaining defaults as is (some fields might be blank, this is OK)
+8. 其余项保留为默认值（某些字段可能为空白，但没关系）
 
-9. Copy/paste the newly created Distribution ID and Domain Name for respective properties in your `.env` file (example below)
-
+9.复制/粘贴新创建的分发ID(Distribution ID)和域名(Domain Name)到`.env` 文件中（示例如下）
    ```diff
    -AWS_CF_DI=
    +AWS_CF_DI=E2IBEULE9QOPVE
@@ -750,23 +751,23 @@ In order for your assets to get properly served in a production environment, you
    +AWS_CF_DOMAIN=d36aditw73gdrz.cloudfront.net
    ```
 
-### 教程
+### 相关教程
 
-* [Writing Your App](https://github.com/koajs/koa#getting-started)
-* [Continous Integration and Deployment](http://niftylettuce.com/posts/automated-node-app-ci-graceful-zerodowntime-github-pm2/)
+* 写一个你自己的App[Writing Your App](https://github.com/koajs/koa#getting-started)
+* 持续继承和部署[Continous Integration and Deployment](http://niftylettuce.com/posts/automated-node-app-ci-graceful-zerodowntime-github-pm2/)
 
-### Community
+### 社区
 
-* [Follow us on Twitter][twitter]
-* [Join our Slack channel][slack]
-* [Subscribe to our Twitch channel][twitch]
+* [Follow us on Twitter](https://twitter.com/niftylettuce)
+* [Join our Slack channel](https://join.slack.com/t/ladjs/shared_invite/zt-fqei6z11-Bq2trhwHQxVc5x~ifiZG0g/)
+* [Subscribe to our Twitch channel](https://www.twitch.tv/niftylettuce)
 * [Visit Koa's Community section](https://github.com/koajs/koa#community).
-* [Join Mongoose's Slack channel][mongoose-slack]
+* [Join Mongoose's Slack channel](http://slack.mongoosejs.io/)
 
 
-## Architecture
+## 架构
 
-The following bash output is the directory structure and organization of Lad:
+以下bash输出是Lad的目录结构:
 
 ```sh
 tree template -I "build|node_modules|coverage|test"
@@ -1033,20 +1034,20 @@ template
 ```
 
 
-## Principles
+## 设计理念
 
-Lad is designed according to these principles:
+Lad是根据以下这些理念设计的:
 
-1. Always be developer-friendly
-2. Adhere to [MVC][], [Unix][], [KISS][], [DRY][], [YAGNI][], [Twelve Factor][twelve-factor], [Occam's razor][occams-razor], and [dogfooding][]
-3. Target the scrappy, bootstrapped, and [ramen-profitable][] hacker
+1. 永远对开发者友好
+2. 遵守 [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller), [Unix](https://en.wikipedia.org/wiki/Unix_philosophy), [KISS](https://en.wikipedia.org/wiki/KISS_principle), [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), [YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it), [Twelve Factor](https://12factor.net/), [Occam's razor](https://en.wikipedia.org/wiki/Occam%27s_razor), and [dogfooding](https://en.wikipedia.org/wiki/Eating_your_own_dog_food)
+3. 面向斗志旺盛，自立更生 和 [拉面收益(所得利润只够开销)](http://www.paulgraham.com/ramenprofitable.html) 小型创业公司.
 
 
-## Related
+## 相关资源
 
-* [lipo][] - Free image manipulation API service built on top of [Sharp][]
-* [cabin][] - Logging and analytics solution for [Node.js][node], [Lad][], [Koa][], and [Express][]
-* [lass][] - Scaffold a modern boilerplate for [Node.js][node]
+* [lipo](https://lipo.io/) - Free image manipulation API service built on top of [Sharp](http://sharp.dimens.io/)
+* [cabin](http://cabinjs.com/) - Logging and analytics solution for [Node.js](https://nodejs.org/), [Lad](https://lad.js.org/), [Koa](http://koajs.com/), and [Express](https://expressjs.com/)
+* [lass](https://lass.js.org/) - Scaffold a modern boilerplate for [Node.js](https://nodejs.org/)
 
 
 ## Contributing
@@ -1096,7 +1097,7 @@ If you are seeking permission to use these trademarks, then please [contact us](
 [MIT](LICENSE) © [Nick Baugh](http://niftylettuce.com)
 
 
-## 相关资源
+## 相关链接
 <a href="#"><img src="https://lad.js.org/media/lad-footer.png" alt="#" /></a>
 
 [npm]( https://www.npmjs.com/)  [yarn]( https://yarnpkg.com/) [lass]( https://lass.js.org)
