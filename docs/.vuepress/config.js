@@ -26,16 +26,16 @@ module.exports = {
 
     /*  插件配置 */
     plugins: [
-        // ['vuepress-plugin-code-copy',
-        //     {
-        //         align: 'bottom',
-        //         color: 'rgba(255,255,255,0.4)',
-        //         backgroundTransition: 'bottom',
-        //         backgroundColor: '#0075b8',
-        //         successText: '复制成功',
-        //         staticIcon: false,
-        //     }
-        // ],
+        ['vuepress-plugin-code-copy',
+            {
+                align: 'bottom',
+                color: 'rgba(255,255,255,0.4)',
+                backgroundTransition: 'bottom',
+                backgroundColor: '#0075b8',
+                successText: '复制成功',
+                staticIcon: false,
+            }
+        ],
         /* 弹窗可以安装这个插件 */
         // @vuepress-reco/vuepress-plugin-bulletin-popover
         
