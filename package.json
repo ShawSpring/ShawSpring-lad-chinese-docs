@@ -20,11 +20,14 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@qcyblm  ": "^1.0.7",
+    "@qcyblm/vuepress-theme-vpx": "^1.0.7",
     "vuepress": "^1.7.1"
   },
   "dependencies": {
     "vuepress-plugin-code-copy": "^1.0.6",
     "vuepress-plugin-toolbar": "^1.0.1"
+  },
+  "directories": {
+    "doc": "docs"
   }
 }
