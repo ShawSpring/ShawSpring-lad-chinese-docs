@@ -4,8 +4,8 @@
   "description": "lad框架的中文翻译",
   "main": "index.js",
   "scripts": {
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
+    "docs:dev": "export NODE_ENV=development&&vuepress dev docs",
+    "docs:build": "export NODE_ENV=production&&vuepress build docs",
     "docs:clean-dev": "vuepress dev docs --clean-cache"
   },
   "repository": {
@@ -20,7 +20,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@qcyblm/vuepress-theme-vpx": "^1.0.7",
+    "@qcyblm  ": "^1.0.7",
     "vuepress": "^1.7.1"
   },
   "dependencies": {
