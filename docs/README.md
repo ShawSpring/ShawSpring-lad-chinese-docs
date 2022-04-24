@@ -193,168 +193,172 @@ npm install -g lad
 </code-group>
 
 
-### Usage
+### 用法
 
-#### Create a project
+#### 创建一个项目
 
 ```sh
 lad new-project
 cd new-project
 ```
 
-#### Development
+#### 开发
 
-To begin, try typing `npm start` (or `yarn start`) on command line.  This will display to you all the scripts you can run.
+命令行输入 `npm start` (or `yarn start`)  这可以列出所有你能运行的脚本命令.
 
-The `start` script (among many others) uses [nps][] and [nps-utils][] under the hood.  This helps to keep scripts very developer-friendly, and rids the need to write in JSON syntax.
+该`start` 命令底层使用了 [nps](https://github.com/kentcdodds/nps) 和 [nps-utils](https://github.com/kentcdodds/nps-utils)。 这样能无需JSON语法，对开发十分友好.
 
-This script accepts a `<task>` argument, whereas a task of `all` will spawn, watch, and re-compile all of the [microservices](#microservices) mentioned above.
+该命令接收一个参数`<task>`, 后面再跟 `all`会生成、监听、重新编译上面提到的所有微服务[microservices](#微服务). 
 
-Just open <http://localhost:3000> for testing!
 
-[npm][]:
+打开 <http://localhost:3000> 即可测试查看效果!
 
+<code-group>
+<code-block title="npm">
 ```sh
 npm start all
 ```
+</code-block>
 
-[yarn][]:
-
+<code-block title="yarn">
 ```sh
 yarn start all
 ```
+</code-block>
+</code-group>
 
-##### Debugging
+##### 调试
 
-* `DEBUG` - debug using [debug][] output (widely adopted package in the community for debugging across all Node packages):
+* `DEBUG` - 使用[debug](https://github.com/visionmedia/debug)进行调试输出 (社区中广泛用于调试所有的Node包):
 
   ```sh
   DEBUG=* ...
   ```
 
-* `NODE_DEBUG` - debug [node][] internal modules:
+* `NODE_DEBUG` - 调试 [node](https://nodejs.org/) 内部模块:
 
   ```sh
   NODE_DEBUG=* ...
   ```
 
-* `MONGOOSE_DEBUG` - debug Mongoose raw database operation output:
+* `MONGOOSE_DEBUG` - 调试Mongoose原生的数据库操作输出:
 
   ```sh
   MONGOOSE_DEBUG=true ...
   ```
 
-* `TRANSPORT_DEBUG` - debug Nodemailer transport:
+* `TRANSPORT_DEBUG` - 调试 Nodemailer transport:
 
   ```sh
   TRANSPORT_DEBUG=true ...
   ```
 
-* `REDIS_MONITOR` - debug Redis using `MONITOR` (uses [@ladjs/redis][ladjs-redis] and passes `true` for the `monitor` argument):
+* `REDIS_MONITOR` - 调试监听 Redis (使用 [@ladjs/redis](https://github.com/ladjs/redis) 并将`monitor`参数设为`true`):
 
   ```sh
   REDIS_MONITOR=true ...
   ```
 
-* `REDIS_FRIENDLY_ERROR_STACK` - debug Redis with friendly error stack messages (see [showFriendlyErrorStack][show-friendly-error-stack] option of [ioredis][])
+* `REDIS_FRIENDLY_ERROR_STACK` - 以错误栈信息友好的方式调试Redis(参阅 [showFriendlyErrorStack](https://github.com/luin/ioredis#error-handling) 的选项[ioredis](https://github.com/luin/ioredis))
 
   ```sh
   REDIS_FRIENDLY_ERROR_STACK=true ...
   ```
 
-#### Production
+#### 生产环境
 
-We strongly recommend using [SemaphoreCI][], [PM2][], and [Digital Ocean][do] for production deployment.
+强烈推荐生产环境下使用 [SemaphoreCI](https://semaphoreci.com/?ref=lad), [PM2](http://pm2.keymetrics.io/), 和 [Digital Ocean](https://m.do.co/c/a7fe489d1b27).
 
-1. We've provided you with a preconfigured [ecosystem.json](template/ecosystem.json) [deployment file](http://pm2.keymetrics.io/docs/usage/deployment/). You will need to modify this file with your server's IP, hostname, and other metadata if needed.
+1. 我们提供了预配置文件[ecosystem.json](https://lad.js.org/template/ecosystem.json) [deployment file](http://pm2.keymetrics.io/docs/usage/deployment/). 你只需要按需修改你服务器的IP, hostname, 以及其它的信息.
 
-2. Make sure that your project's assets are built with `NODE_ENV=production` flag, e.g. `NODE_ENV=production npm run build` (or with yarn as `yarn build`);this creates a `build/rev-manifest.json` file per [koa-manifest-rev][].
+2. 确保你的项目构建时是在 `NODE_ENV=production` 环境, 比如: `NODE_ENV=production npm run build` (或者`yarn build`);这会每个 [koa-manifest-rev](https://github.com/niftylettuce/koa-manifest-rev)对应创建一个 `build/rev-manifest.json`.
 
-3. You can test this locally by installing [PM2][] globally with [npm][] or [yarn][], and then running the following command:
+3. 本地测试可以通过 [npm](https://www.npmjs.com/) 或 [yarn](https://yarnpkg.com/)全局安装[PM2](http://pm2.keymetrics.io/), 然后运行以下命令:
 
    ```sh
    NODE_ENV=production pm2 start
    ```
 
-4. See the [Continuous Integration and Code Coverage](#continuous-integration-and-code-coverage) and [Tutorials](#tutorials) sections below for instructions on how to setup continuous integration, code coverage, and deployment.
+4. 参阅下面 [持续继承和代码覆盖率测试](#持续继承和代码覆盖率测试) 和 [教程](#教程)，以获得相关教程.
 
-5. If you specify an environment variable value for `AWS_CF_DOMAIN` and `NODE_ENV=production` is set then your assets will need to be published to Amazon S3/Cloudfront. To do so run `npm start publish-assets` (or with yarn as `yarn start publish-assets`).  This command automatically sets `NODE_ENV=production` for you as well via `cross-env`.
+5. 如果你需要将程序发布到Amazon S3/Cloudfront，请设置环境变量`AWS_CF_DOMAIN` 并且设置 `NODE_ENV=production`. 请运行`npm start publish-assets` (或 `yarn start publish-assets`).  该命令会自动设置`NODE_ENV=production` 通过 `cross-env`.
 
 #### Provisioning
 
-See the [ansible](ansible/) folder for our [Ansible][] configuration and playbooks, which we use to provision servers with.
+请参阅 [ansible](https://lad.js.org/ansible/)文件夹了解我们的[Ansible](https://github.com/ansible/ansible) 配置和行动指南(playbooks), 这里面有如何配置服务器的详细信息。
 
-We recommend you to install [yamllint][] and configure it in your editor while working with [Ansible][] playbooks.
+在使用 [Ansible](https://github.com/ansible/ansible) 行动指南时，我们建议你安装[yamllint](https://github.com/adrienverge/yamllint) 并在编辑器中对其进行配置.
 
-Also note that [ansible-lint][] is a helpful linting tool you can use if you plan on making changes to playbooks.  Note that our current playbooks have several existing lint errors.
+另外， 当你计划修改行动指南时[ansible-lint](https://github.com/ansible/ansible-lint) 是一个很有用的lint检查工具.  注意到当前的行动指南(playbooks)有几处lint错误.
 
-First you must provision Ubuntu 18.04 LTS 64-bit server(s) using [Digital Ocean][digital-ocean], [Linode][], [Vultr][], or your host of choice.  These newly provisioned server(s) should have your SSH key automatically added.
+首先，你需要准备好 Ubuntu 18.04 LTS 64-bit 的服务器(群), 可以使用 [Digital Ocean](https://m.do.co/c/2ffb8129b8d6), [Linode](https://www.linode.com/?r=a2840b36770c7020730251a5643428ddbf2e284e), [Vultr](https://www.vultr.com/?ref=7429848),或者其它的云服务器.  这些新服务器你需要添加 SSH 访问秘钥.
 
-Follow the [Deployment](#deployment) guide below for automatic provisioning and deployment instructions.
+接下来，参阅[部署](#部署)了解如何配置和部署服务器.
 
-##### Deployment
+##### 部署
 
-1. Set up host configuration by copying the `hosts.yml` file template:
+1. 配置主机host, 可以拷贝 `hosts.yml`文件模板:
 
    ```sh
    cp ansible/playbooks/templates/hosts.yml hosts.yml
    ```
 
-2. Edit this configuration and update the file with your newly created server aliases and IP addresses.  You can add more than one host to each group if you are setting up load balancing.  Refer to the [Naming Convention](#naming-convention) documentation for our recommended approach to server alias naming.  Note that this file is automatically ignored by git.  If you have a private repository and would like to commit this, then remove `hosts.yml` from the root `.gitignore` file.
+<!-- BUG:Naming Convention原文也没有 -->
+2. 编辑该配置文件，配置你的服务器别名和IP地址. 如做负载均衡你可以每组添加不止一台服务器. 关于我们推荐的服务器别名命名方法，请参阅命名 [Naming Convention](#naming-convention) 文档.  该文件自动被git忽略, 如果你的私有库想提交该文件, 请从`.gitignore`中手动移除 `hosts.yml`.
 
    ```sh
    vim hosts.yml
    ```
 
-3. Set up environment configuration by copying the `env` file template:
+3. 环境配置，可以拷贝 `env` 模板文件:
 
    ```sh
    cp ansible/playbooks/templates/env .env.production
    ```
-
-4. Edit this configuration and reference the official [Lad][] documentation for a list of all available environment variables (or see [.env.defaults](.env.defaults)).  **You will need to open this file in your preferred editor** and set the values for any fields containing `TODO`, whereby you replace `TODO` with the appropriate value.  Preserve double quotes where they are already defined.
+<!-- BUG: .env.defaults原文也不存在  -->
+4. 编辑该配置文件，可用的环境变量配置请参阅官方[Lad](https://lad.js.org/) 文档 (或参阅 [.env.defaults](https://lad.js.org/.env.defaults)).  **你需要在你的编辑器上打开该文件** 并给任何标记了`TODO`的字段设置值. 记得保留双引号.
 
    ```sh
    vim .env.production
    ```
 
-5. Generate [pm2][] [ecosystem files][ecosystem-files] using our automatic template generator. We created an [ansible-playbook.js](ansible-playbook.js) which loads the `.env.production` environment variables rendered with [@ladjs/env][] into `process.env`, which then gets used in the playbooks.  This is a superior, simple, and the only known dotenv approach we know of in Ansible. Newly created `ecosystem-api.json`, `ecosystem-bree.json`, `ecosystem-web.json` files will now be created for you in the root of the repository.  If you ever more add or change IP addresses, you can simply re-run this command.
+5. 使用自动模板生成器来生成 [pm2](http://pm2.keymetrics.io/) [ecosystem files](https://pm2.keymetrics.io/docs/usage/application-declaration/). 创建 [ansible-playbook.js](https://lad.js.org/ansible-playbook.js) 来加载 `.env.production` 环境变量，这些环境变量通过 [@ladjs/env](https://github.com/ladjs/env) 加载进`process.env`中， 随后在行动指南(playbooks)中要用到.  这是一种优先级高、简单的也是在Ansible中唯一的`dotenv`方法.  新的`ecosystem-api.json`, `ecosystem-bree.json`, `ecosystem-web.json` 文件会创建在你的根目录下. 如果再添加或更改 IP 地址，只需重新运行此命令即可.
 
    ```sh
    node ansible-playbook ansible/playbooks/ecosystem.yml -l 'localhost'
    ```
 
-6. Set up the web and API server(s) (see [patterns and ansible-playbook flags docs](https://docs.ansible.com/ansible/latest/user_guide/intro_patterns.html#patterns-and-ansible-playbook-flags) if you need help).  If you completely (or partially) run this playbook (or any others below), then the second time you try to run it may not succeed.  This is because we prevent root user access through security hardening.  To workaround this, run the same command but without `-e 'ansible_user=root'` appended as it will default to the `devops` user created.
+6. 设置web或IP服务器(群)(详情参阅 [patterns and ansible-playbook flags docs](https://docs.ansible.com/ansible/latest/user_guide/intro_patterns.html#patterns-and-ansible-playbook-flags)). 如果你完整(或部分)的运行行动指南(playbooks)或这下边的其它东西, 随之第二次运行可能出现失败, 这是因为我们通过安全强化来阻止 root 用户访问.  要解决此问题, 可重新运行该命令但不附加 `-e 'ansible_user=root'`, 此情况默认user为创建者.
 
    ```sh
    node ansible-playbook ansible/playbooks/http.yml -e 'ansible_user=root' -l 'http'
    ```
 
-7. Set up the Bree server(s):
+7. 设置 Bree 服务器(群):
 
    ```sh
    node ansible-playbook ansible/playbooks/bree.yml -e 'ansible_user=root' -l 'bree'
    ```
 
-8. Set up the Redis server:
+8. 设置 Redis 服务器:
 
    ```sh
    node ansible-playbook ansible/playbooks/redis.yml -e 'ansible_user=root' -l 'redis'
    ```
 
-9. Set up the Mongo server:
+9. 设置 MongoDB 服务器:
 
    ```sh
    node ansible-playbook ansible/playbooks/mongo.yml -e 'ansible_user=root' -l 'mongo'
    ```
 
-10. Set up GitHub deployment keys for all the servers. Note that the `deployment-keys` directory is ignored from git, so if you have a private repository and wish to commit it, then remove `deployment-keys` from the `.gitignore` file.
+10. 给所有服务器设置 GitHub deployment keys. 注意`deployment-keys`目录被git忽略了, 所以如果私有库需要上传 `deployment-keys`需手动从`.gitignore`文件中移除.
 
     ```sh
     node ansible-playbook ansible/playbooks/deployment-keys.yml -l 'http:bree'
     ```
 
-11. Go to your repository "Settings" page on GitHub, click on "Deploy keys", and then add a deployment key for each servers' deployment key copied to the `deployment-keys` directory.  If you're on macOS, you can use the `pbcopy` command to copy each file's contents to your clipboard.  Use tab completion for speed, and replace the server names and paths with yours:
+11. 打开github中库的"Settings"页, 点击 "Deploy keys", 然后复制秘钥到 `deployment-keys` 目录，从而为每台服务器添加一个部署秘钥deployment key.  如果是macOS上, 可使用 `pbcopy`命令复制每个文件的内容到剪贴板. 按tab键快速填充，或者替换为自己的服务器名称和路径.
 
     ```sh
     cat deployment-keys/api-1-li-dal.forwardemail.net.pub | pbcopy
@@ -367,7 +371,7 @@ Follow the [Deployment](#deployment) guide below for automatic provisioning and 
     #
     ```
 
-12. Set up PM2 deployment directories on all the servers:
+12. 为所有服务器设置 PM2 部署目录:
 
     ```sh
     pm2 deploy ecosystem-web.json production setup
@@ -381,13 +385,14 @@ Follow the [Deployment](#deployment) guide below for automatic provisioning and 
     pm2 deploy ecosystem-bree.json production setup
     ```
 
-13. Create a SSL certificate at [Namecheap][] (we recommend a 5 year wildcard certificate), set up the certificate, and download and extract the ZIP file with the certificate (emailed to you) to your computer. We do not recommend using tools like [LetsEncrypt][] and `certbot` due to complexity when you have (or scale to) a cluster of servers set up behind load balancers.  In other words, we've tried approaches like `lsyncd` in combination with `crontab` for `certbot` renewals and automatic checking.  Furthermore, using this exposes the server(s) to downtime as ports `80` and `443` may need to be shut down so that `certbot` can use them for certificate generation.  This is not a reliable approach, and simply renewing certificates once a year is vastly simpler and also makes using load balancers trivial.  Instead you can use a provider like [Namecheap][] to get a cheap SSL certificate, then run a few commands as we've documented below. This command will prompt you for an absolute file path to the certificates you downloaded. Renewed your certificate after 1 year? Simply follow this step again.  Do not set a password on the certificate files.  When using the `openssl` command (see Namecheap instructions), you need to use `*.example.com` with an asterisk followed by a period if you are registering a wildcard certificate.
+
+13. 在[Namecheap](https://namecheap.com/)上创建一个 SSL 证书 (我们建议是 5年的通配型证书), 设置证书, 然后在电脑上下载解压证书(通过email发给你的).  我们不建议使用像 [LetsEncrypt](https://letsencrypt.org/) 和 `certbot`等工具， 因为当你使用(或扩展到)服务器集群及负载均衡时会很复杂.   换句话讲，我们已经尝试过 `lsyncd` 结合 `crontab` 来进行`certbot`证书的续期和自动检查的方法.  另外, 使用该方法服务器会面临停机，因此`80` 和 `443` 端口需要关闭， 以便生成`certbot`证书. 这不是一种可靠的方法，并且只需每年续订一次证书要简单得多，并且还使得使用负载均衡器变得微不足道。  更好的办法是： 使用[Namecheap](https://namecheap.com/) 得到一个便宜的 SSL 证书, 然后运行如下所示的少量命令. 此命令将提示你输入下载证书的绝对路径.  一年后重新生成证书?  简单重复这一步骤就行, 注意证书文件上别设置密码.  当使用`openssl` 命令 (详情参见[Namecheap](https://namecheap.com/))时, 如果你注册通配符证书,你需要使用`*.example.com` 句点后边跟星号
 
     ```sh
     ansible-playbook ansible/playbooks/certificates.yml
     ```
 
-    > **Important:** If you renew or change certificates in the future, then after running the previous command, you will subsequently need to reload the processes as such:
+    > **Important:** 如果将来续订或更改证书，则在运行上一个命令后，随后需要按如下方式重新加载进程:
 
     ```sh
     #
@@ -398,19 +403,19 @@ Follow the [Deployment](#deployment) guide below for automatic provisioning and 
     pm2 deploy ecosystem-api.json production exec "pm2 reload api"
     ```
 
-14. (Optional) Create a Google application credentials profile file and store it locally.  You only need this if you want to support automatic translation.  The following command will prompt you for the absolute file path (e.g. `/path/to/client-profile.json`).  See the [mandarin][] docs for more information.
+14. (可选) 如果你需要支持自动翻译，只需创建Google应用证书文件并本地存储.  下面的命令会提示你输入绝对路径 (e.g. `/path/to/client-profile.json`).  关于普通话的详细信息，请参阅[mandarin](https://github.com/niftylettuce/mandarin).
 
     ```sh
     ansible-playbook ansible/playbooks/gapp-creds.yml -l 'http:bree'
     ```
 
-15. Copy the `.env.production` file and create an AWS config file on the servers:
+15. 复制 `.env.production` 并在AWS服务器上创建配置文件:
 
     ```sh
     node ansible-playbook ansible/playbooks/env.yml -l 'http:bree'
     ```
 
-16. Run an initial deploy to all the servers:
+16. 在所有服务器上运行和初始化部署:
 
     ```sh
     pm2 deploy ecosystem-web.json production
@@ -424,7 +429,7 @@ Follow the [Deployment](#deployment) guide below for automatic provisioning and 
     pm2 deploy ecosystem-bree.json production
     ```
 
-17. Save the process list on the servers so when if the server were to reboot, it will automatically boot back up the processes:
+17. 保存进程列表，以便服务器重启时能自动重新启动这些进程:
 
     ```sh
     pm2 deploy ecosystem-web.json production exec "pm2 save"
@@ -438,49 +443,51 @@ Follow the [Deployment](#deployment) guide below for automatic provisioning and 
     pm2 deploy ecosystem-bree.json production exec "pm2 save"
     ```
 
-18. Test by visiting your web and API server in your browser (click "proceed to unsafe" site and bypass certificate warning).
+18. 在浏览器上访问来测试你的 Web 和 API 服务器 (点击 "proceed to unsafe" 忽略证书警告certificate warning).
 
-19. Configure your DNS records for the web and API server hostnames and respective IP addresses.
+19. 为 Web 和 API 服务器主机名以及相应的 IP 地址配置 DNS 记录.
 
-20. Test by visiting your web and API server in your browser (in an incognito window).  There should not be any certificate warnings (similar to the one that occurred in step 15).
+20. 在浏览器上访问来测试你的 Web 和 API 服务器(打开隐私窗口InPrivate).  这儿应该没有证书警告 (类似于步骤15).
 
-21. (Optional) Remove the local `.env.production` file for security purposes.  If you do this, then make sure you have a backup, or securely back up off the server in the future before destroying the server.
+21. (可选)出于安全目的，移除本地 `.env.production`文件.  如果这样做，请确保有备份, 或者在将来销毁服务器之前安全地从服务器备份.
 
     ```sh
     rm .env.production
     ```
 
-22. (Optional) Remove the local certificate files you downloaded locally and specified in step 11.  If you do this, then make sure you have a backup, or securely back up off the server in the future before destroying the server.
+22. (可选) 删除本地下载的步骤 11中指定的本地证书文件. 如果这样做，请确保有备份, 或者在将来销毁服务器之前安全地从服务器备份.
 
-23. Finished. If you need to deploy again, then push your changes to GitHub `master` branch and then follow step 14 again.  We recommend you to read the [Ansible getting started guide][ansible-guide], as it provides you with insight into commands like `ansible all -a "echo hello"` which can be run across all or specific servers.
+23. 完成. 如果你需要再次部署, 修改后push到github `master` 分支然后再根据步骤14操作.  我们建议你阅读Ansible上手指南[Ansible getting started guide](https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html), 这能帮助你更深入了解运行在所有或指定服务器上的命令如 `ansible all -a "echo hello"`
 
-#### Tests
+#### 测试
 
-We use [ava][] and [nyc][] for testing and code coverage.
+我们使用 [ava](https://github.com/avajs/ava) 和 [nyc](https://github.com/istanbuljs/nyc) 来做测试和代码覆盖code coverage.
 
-[npm][]:
-
+<code-group>
+<code-block title="npm">
 ```sh
 npm test
 ```
+</code-block>
 
-[yarn][]:
-
+<code-block title="yarn">
 ```sh
 yarn test
 ```
+</code-block>
+</code-group>
 
-### Configuration
+### 配置
 
-#### Environment Variables
+#### 环境变量
 
-We have made configuration of your Lad project easy through a [dotenv][] configuration package called [@ladjs/env][lad-env], per [Twelve-Factor][twelve-factor].
+通过 [dotenv](https://github.com/motdotla/dotenv) 的名为 [@ladjs/env](https://github.com/ladjs/env)的配置包, 按照 [Twelve-Factor](https://12factor.net/)原则，使你的Lad项目配置十分容易.
 
-We use the following three packages to manage configuration:
+我们使用下列3个包来管理配置:
 
-* [dotenv-extended][] - allows us to craft a `.env` definition (otherwise known as a "schema") in a file named `.env.schema`
-* [mustache][] - allows us to use the [Mustache templating language][mustache] in our `.env` and `.env.defaults` configuration files
-* [dotenv-parse-variables][] - automatically parses variable types from `process.env` (e.g. `FOO=4` will set `process.env.FOO = 4` with a `Number` variable type instead of a `String`)
+* [dotenv-extended](https://github.com/niftylettuce/node-dotenv-extended) - 允许我们在名为`.env.schema`的文件中创建 `.env` 定义 (也叫做"schema")
+* [mustache](https://github.com/janl/mustache.js/) - allows us to use the [Mustache templating language](https://github.com/janl/mustache.js/) in our `.env` and `.env.defaults` configuration files
+* [dotenv-parse-variables](https://github.com/niftylettuce/dotenv-parse-variables) - automatically parses variable types from `process.env` (e.g. `FOO=4` will set `process.env.FOO = 4` with a `Number` variable type instead of a `String`)
 
 Configuration is managed by the following, in order of priority:
 
@@ -492,7 +499,7 @@ Configuration is managed by the following, in order of priority:
 
 Precedence is taken by the environment configuration files, environment variables, then the `.env` file.
 
-Basically [dotenv][] won't set an environment variable if it already detects it was passed as an environment variable.
+Basically [dotenv](https://github.com/motdotla/dotenv) won't set an environment variable if it already detects it was passed as an environment variable.
 
 Take a look at the [config](template/config) folder contents and also at the defaults at [.env.defaults](template/.env.defaults).
 
@@ -671,19 +678,19 @@ In order to add Google sign-in to your app (so users can log in with their Googl
 2. Enable the Google Translate API
 3. Copy your API key and set it as the environment variable `GOOGLE_TRANSLATE_KEY=******`
 
-#### Continuous Integration and Code Coverage
+#### 持续继承和代码覆盖率测试
 
-We strongly recommend that you use [SemaphoreCI][] for continuous integration and [Codecov][] for code coverage.
+We strongly recommend that you use [SemaphoreCI](https://semaphoreci.com/?ref=lad) for continuous integration and [Codecov][https://codecov.io/gh] for code coverage.
 
-Here are the simple steps required to setup [SemaphoreCI][] with [Codecov][]:
+Here are the simple steps required to setup [SemaphoreCI](https://semaphoreci.com/?ref=lad) with [Codecov][https://codecov.io/gh]:
 
-1. Go to [SemaphoreCI][] and sign up for a free account
+1. Go to [SemaphoreCI](https://semaphoreci.com/?ref=lad) and sign up for a free account
 
 2. Once your repository is pushed to GitHub, add it as a project on SemaphoreCI
 
 3. Configure your project on SemaphoreCI with the following build settings:
 
-   > Replace `npm` with `yarn` if you're using [yarn][] as your package manager
+   > Replace `npm` with `yarn` if you're using [yarn](https://yarnpkg.com/) as your package manager
 
    * Language: `JavaScript`
    * Node.js version: `10+` (latest LTS)
@@ -692,7 +699,7 @@ Here are the simple steps required to setup [SemaphoreCI][] with [Codecov][]:
    * Job 1: `npm run test-coverage`
    * After job: `npm run coverage`
 
-4. Go to [Codecov][] and sign up for a free account
+4. Go to [Codecov][https://codecov.io/gh] and sign up for a free account
 
 5. Add your project on Codecov and copy to your clipboard the token
 
@@ -743,7 +750,7 @@ In order for your assets to get properly served in a production environment, you
    +AWS_CF_DOMAIN=d36aditw73gdrz.cloudfront.net
    ```
 
-### Tutorials
+### 教程
 
 * [Writing Your App](https://github.com/koajs/koa#getting-started)
 * [Continous Integration and Deployment](http://niftylettuce.com/posts/automated-node-app-ci-graceful-zerodowntime-github-pm2/)
